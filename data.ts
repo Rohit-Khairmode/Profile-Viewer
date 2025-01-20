@@ -45,8 +45,8 @@ export const profiles: Profile[] = [
       address: "Madeira, Portugal",
     },
     coordinates: {
-      latitude: 32.666,
-      longitude: -16.924,
+      latitude: 32.7607074,
+      longitude: -16.9594723,
     },
     hobbies: ["Football", "Fitness", "Philanthropy"],
     achievements: [
@@ -411,4 +411,7 @@ export const profiles: Profile[] = [
 ];
 export function getProfileById(id: number) {
   return profiles.find((profile) => profile.id === id);
+}
+export function deleteProfileById(id: number) {
+  return profiles.filter((profile) => profile.id !== id);
 }

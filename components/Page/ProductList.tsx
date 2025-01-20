@@ -12,9 +12,12 @@ function ProductList() {
     <>
       <div className="flex py-4 items-center justify-between">
         {isAdmin ? (
-          <Button onClick={() => {}} type={ButtonTypes.Edit}>
-            Add User
-          </Button>
+          <button
+            className="px-4 py-2 text-center rounded-lg bg-primary text-white font-bold text-lg hover:bg-shade1"
+            onClick={() => {}}
+          >
+            Add user
+          </button>
         ) : (
           <h3 className="uppercase font-bold text-shade2 text-2xl">Profiles</h3>
         )}

@@ -1,20 +1,25 @@
 "use client";
 
-import { Profile } from "@/types";
-import SocialMediaIcon from "../SocialMediaIcon";
 import { useAuth } from "@/context/auth";
+import { useProfile } from "@/context/ProfilesContext";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import MapContainer from "../MapContainer";
+import { useEffect, useState } from "react";
+import MapComponent2 from "../MapComponent2";
+import SocialMediaIcon from "../SocialMediaIcon";
 
-function ProfileDetails({ profile }: { profile: Profile }) {
+function ProfileDetails({ profileId }: { profileId: number }) {
   const { isLogin } = useAuth();
   const router = useRouter();
-  if (!isLogin) {
-    router.push("/");
-    return null;
-  }
-  const [isShowMap, setShowMap] = useState(false);
+  useEffect(() => {
+    if (!isLogin) {
+      router.push("/");
+    }
+  }, []);
+  const [isShowMap, setShowMap] = useState(true);
+  const { getProfileById } = useProfile();
+  const profile = getProfileById(profileId);
+  if (!profile)
+    return <div>OOP's the id you have inserted is not exist yet</div>;
   const {
     name,
     description,
@@ -26,14 +31,16 @@ function ProfileDetails({ profile }: { profile: Profile }) {
     achievements,
   } = profile;
   return (
-    <>
-      <div className="flex gap-4 py-2 px-2 max-w-[1200px] text-gray-600 m-auto mt-4">
-        <div
-          role="img"
-          aria-label={`${name}'s Image`}
-          style={{ backgroundImage: `url(${image})` }}
-          className=" w-[30vw] rounded-lg bg-no-repeat bg-cover bg-top border-4 border-primary"
-        ></div>
+    <div className="mb-10">
+      <div className="flex gap-4 py-2 px-2 max-w-[1200px] text-gray-600 m-auto mt-4 overflow-hidden">
+        <div className="overflow-hidden w-[30vw] border-4 border-primary rounded-lg ">
+          <div
+            role="img"
+            aria-label={`${name}'s Image`}
+            style={{ backgroundImage: `url(${image})` }}
+            className=" h-full  bg-no-repeat bg-cover bg-top  duration-300 overflow-hidden hover:scale-110"
+          ></div>
+        </div>
         <div>
           <div className="flex flex-col gap-2">
             <h3 className="uppercase font-bold text-2xl text-shade2 rounded-lg px-4 py-2 bg-white ">
@@ -87,20 +94,12 @@ function ProfileDetails({ profile }: { profile: Profile }) {
           </button>
         </div>
       </div>
-      <div className="py-2 px-2 max-w-[1200px] m-auto mt-4">
+      <div className=" max-w-[1200px] mx-auto my-4">
         {isShowMap && (
-          <div
-            className={`mapComponent flex-1 `}
-            style={{ height: "200px", width: "100%" }}
-          >
-            <MapContainer
-              longitude={profile.coordinates.longitude}
-              latitude={profile.coordinates.latitude}
-            />
-          </div>
+          <MapComponent2 center={[latitude, longitude]} zoom={13} />
         )}
       </div>
-    </>
+    </div>
   );
 }
 function InterestTag({ interest }: { interest: string }) {
