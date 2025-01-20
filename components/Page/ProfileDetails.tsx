@@ -15,7 +15,7 @@ function ProfileDetails({ profileId }: { profileId: number }) {
       router.push("/");
     }
   }, []);
-  const [isShowMap, setShowMap] = useState(true);
+  const [isShowMap, setShowMap] = useState(false);
   const { getProfileById } = useProfile();
   const profile = getProfileById(profileId);
   if (!profile)
@@ -89,8 +89,13 @@ function ProfileDetails({ profileId }: { profileId: number }) {
           <div className="rounded-lg px-4 py-2 bg-white">
             Longitude: {longitude}
           </div>
-          <button className="text-white px-4 py-2 font-bold text-2xl rounded-lg justify-self-start  hover:bg-shade1 duration-300 bg-primary">
-            Show on Map
+          <button
+            onClick={() => {
+              setShowMap(!isShowMap);
+            }}
+            className="text-white px-4 py-2 font-bold text-2xl rounded-lg justify-self-start  hover:bg-shade1 duration-300 bg-primary"
+          >
+            {isShowMap ? "Close map" : " Show on Map"}
           </button>
         </div>
       </div>

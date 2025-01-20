@@ -6,7 +6,7 @@ import Link from "next/link";
 function ProfileCard({ profile }: { profile: Profile }) {
   const { image, name, id, description } = profile;
   const { isAdmin } = useAuth();
-  const { isOpen, setIsOpen, setProfileId } = useModal();
+  const { isOpen, setIsOpen, setProfileId, setType } = useModal();
 
   return (
     <>
@@ -29,7 +29,11 @@ function ProfileCard({ profile }: { profile: Profile }) {
           <div className="flex justify-around mt-auto p-2">
             <button
               className="px-4 py-2 text-center rounded-lg bg-green-800 text-white font-bold  hover:bg-green-600"
-              onClick={() => {}}
+              onClick={() => {
+                setIsOpen(true);
+                setProfileId(id);
+                setType("edit");
+              }}
             >
               Edit
             </button>
@@ -39,6 +43,7 @@ function ProfileCard({ profile }: { profile: Profile }) {
                 // alert(id);
                 setIsOpen(true);
                 setProfileId(id);
+                setType("delete");
               }}
             >
               Delete

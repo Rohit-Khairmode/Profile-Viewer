@@ -7,6 +7,8 @@ const ModalContext = createContext<
       setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
       profileId: number;
       setProfileId: React.Dispatch<React.SetStateAction<number>>;
+      type: string;
+      setType: React.Dispatch<React.SetStateAction<string>>;
     }
   | undefined
 >(undefined);
@@ -14,9 +16,10 @@ const ModalContext = createContext<
 function ModalProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [profileId, setProfileId] = useState(-1);
+  const [type, setType] = useState("");
   return (
     <ModalContext.Provider
-      value={{ isOpen, setIsOpen, profileId, setProfileId }}
+      value={{ isOpen, setIsOpen, profileId, setProfileId, type, setType }}
     >
       {children}
     </ModalContext.Provider>

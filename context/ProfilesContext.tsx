@@ -48,8 +48,8 @@ function ProfileProvider({ children }: { children: ReactNode }) {
   const updateProfileById = useCallback(
     (id: number, profile: Profile): boolean => {
       const updatedProfiles = profiles.filter((profile) => profile.id !== id);
-      if (updateProfileById.length === profiles.length) return false;
-      updatedProfiles.push(profile);
+      // if (updateProfileById.length === profiles.length) return false;
+      updatedProfiles.unshift(profile);
       _setProfiles([...updatedProfiles]);
       return true;
     },

@@ -2,13 +2,14 @@
 import DeleteModal from "@/components/DeleteModal";
 import ModalWindow from "@/components/ModalWindow";
 import ProductList from "@/components/Page/ProductList";
+import UpdateProfileForm from "@/components/UpdateProfileForm";
 import { useAuth } from "@/context/auth";
 import { useModal } from "@/context/modal";
 import { useEffect } from "react";
 
 export default function Home() {
   const { setIsAdmin, isLogin, setIsLogin } = useAuth();
-  const { isOpen } = useModal();
+  const { isOpen, type } = useModal();
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");
@@ -49,7 +50,8 @@ export default function Home() {
       </main>
       {isOpen && (
         <ModalWindow>
-          <DeleteModal />
+          {type.toLowerCase() === "delete" && <DeleteModal />}
+          {type.toLowerCase() === "edit" && <UpdateProfileForm />}
         </ModalWindow>
       )}
     </>
