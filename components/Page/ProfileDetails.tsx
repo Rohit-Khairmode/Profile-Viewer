@@ -32,7 +32,7 @@ function ProfileDetails({ profileId }: { profileId: number }) {
   } = profile;
   return (
     <div className="mb-10">
-      <div className="flex gap-4 py-2 px-2 max-w-[1200px] text-gray-600 m-auto mt-4 overflow-hidden">
+      <div className="flex flex-col md:flex-row gap-4 py-2 px-2 max-w-[1200px] text-gray-600 m-auto mt-4 overflow-hidden">
         <div className="overflow-hidden w-[30vw] border-4 border-primary rounded-lg ">
           <div
             role="img"
@@ -99,7 +99,7 @@ function ProfileDetails({ profileId }: { profileId: number }) {
           </button>
         </div>
       </div>
-      <div className=" max-w-[1200px] mx-auto my-4">
+      <div className=" max-w-[1200px] md:mx-auto my-4 mx-3 ">
         {isShowMap && (
           <MapComponent2 center={[latitude, longitude]} zoom={13} />
         )}

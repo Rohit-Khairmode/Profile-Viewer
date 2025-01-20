@@ -72,10 +72,6 @@ const UpdateProfileForm = () => {
         return !isNaN(value) && value !== ""
           ? ""
           : "Coordinates must be valid numbers.";
-      //   case "hobbies":
-      //     return Array.isArray(value) && value.length > 0
-      //       ? ""
-      //       : "At least one hobby is required.";
       case "socialMedia":
         return value.every((item: any) => item.platform && item.url)
           ? ""
@@ -132,7 +128,7 @@ const UpdateProfileForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 bg-gray-100 rounded shadow-md space-y-4 w-[50vw] h-[70vh] overflow-scroll"
+      className="p-6 bg-gray-100 rounded shadow-md space-y-4 w-[80vw] md:w-[50vw] h-[70vh] overflow-scroll"
     >
       <h2 className="text-lg font-bold">Update Profile</h2>
 
@@ -199,19 +195,6 @@ const UpdateProfileForm = () => {
           <p className="text-red-500 text-sm">{errors["contacts.address"]}</p>
         )}
       </div>
-      {/* <div>
-        <label className="block">Interest</label>
-        <input
-          type="text"
-          name="contacts.address"
-          value={formData.contacts.address}
-          onChange={handleInputChange}
-          className="w-full p-2 border rounded"
-        />
-        {errors["contacts.address"] && (
-          <p className="text-red-500 text-sm">{errors["contacts.address"]}</p>
-        )}
-      </div> */}
       <div>
         <label className="block">Latitude</label>
         <input
